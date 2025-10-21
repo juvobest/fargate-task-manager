@@ -1,0 +1,21 @@
+{
+  "family": "fargate-task-manager",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "executionRoleArn": "arn:aws:iam::590184058887:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "task-manager-container",
+      "image": "590184058887.dkr.ecr.eu-west-2.amazonaws.com/task-manager-app:latest",
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true
+    }
+  ]
+}

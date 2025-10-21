@@ -1,0 +1,56 @@
+<%- include('partials/flash', { flash: flash }) %>
+
+<section class="row">
+  <div class="col-12 col-md-6">
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Create a Task</h5>
+        <form action="/tasks" method="post">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input required name="title" id="title" class="form-control" placeholder="Buy groceries or finish project" />
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description <small class="text-muted">(optional)</small></label>
+            <textarea name="description" id="description" rows="3" class="form-control" placeholder="Add details..."></textarea>
+          </div>
+          <div class="d-grid">
+            <button class="btn btn-primary">Add Task</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">Tips</h6>
+        <p class="small text-muted mb-0">This demo stores tasks in memory — they reset when the server restarts. Perfect for deploying as a stateless container.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <h5 class="mb-3">Tasks</h5>
+
+    <% if (tasks.length === 0) { %>
+      <div class="alert alert-info">No tasks yet — add one on the left.</div>
+    <% } else { %>
+      <div class="list-group">
+        <% tasks.forEach(task => { %>
+          <div class="list-group-item list-group-item-action mb-2 shadow-sm">
+            <div class="d-flex w-100 justify-content-between">
+              <h6 class="mb-1"><%= task.title %></h6>
+              <small class="text-muted"><%= new Date(task.createdAt).toLocaleString() %></small>
+            </div>
+            <% if (task.description) { %>
+              <p class="mb-1 text-muted"><%= task.description %></p>
+            <% } %>
+            <form action="/tasks/<%= task.id %>/delete" method="post" onsubmit="return confirm('Delete task?')">
+              <button class="btn btn-sm btn-outline-danger">Delete</button>
+            </form>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</section>

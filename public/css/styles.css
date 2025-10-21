@@ -1,0 +1,7 @@
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.card { border-radius: 12px; }
+.list-group-item { border-radius: 8px; }
+.navbar-brand { font-size: 1.15rem; letter-spacing: 0.5px; }
